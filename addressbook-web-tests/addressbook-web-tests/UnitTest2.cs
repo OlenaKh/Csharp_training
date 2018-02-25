@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
-
+using OpenQA.Selenium.Chrome;
 namespace SeleniumTests
 {
     [TestFixture]
@@ -20,11 +16,9 @@ namespace SeleniumTests
         [SetUp]
         public void SetupTest()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.BrowserExecutableLocation = @"C:\Program Files (x86)\Mozilla\firefox.exe";
-            options.UseLegacyImplementation = true;
-            driver = new FirefoxDriver(options);
+            driver = new ChromeDriver();
             baseURL = "http://localhost/";
+            
             verificationErrors = new StringBuilder();
         }
 
@@ -45,6 +39,7 @@ namespace SeleniumTests
         [Test]
         public void Test2()
         {
+           
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
             driver.FindElement(By.Name("user")).Clear();
             driver.FindElement(By.Name("user")).SendKeys("admin");
