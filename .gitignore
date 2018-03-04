@@ -287,3 +287,10 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 /addressbook-web-tests/addressbook-web-tests/GroupCreationTests.cs
+
+#Ignore the next files
+packages.config
+chromedriver.exe
+AssemblyInfo.cs
+addressbook-web-tests.csproj
+addressbook-web-tests.sln
