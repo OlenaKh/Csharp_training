@@ -10,16 +10,21 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitNewGroupCreation();
             GroupData groupData = new GroupData("Test Group 1");
             groupData.Header = "Group Header";
             groupData.Footer = "Comment";
-            FillGroupForm(groupData);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
+
+            appManager.Groups.Create(groupData);
+        }
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData groupData = new GroupData("");
+            groupData.Header = "";
+            groupData.Footer = "";
+
+            appManager.Groups.Create(groupData);
         }
     }
 }

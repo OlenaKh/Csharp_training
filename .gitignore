@@ -289,7 +289,6 @@ __pycache__/
 /addressbook-web-tests/addressbook-web-tests/GroupCreationTests.cs
 
 #Ignore the next files
-packages.config
 chromedriver.exe
 AssemblyInfo.cs
 addressbook-web-tests.csproj

@@ -7,100 +7,28 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class TestBase
+    public class ContactHelper : HelperBase
     {
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
-        protected string baseURL;
-        private bool acceptNextAlert = true;
-
-        [SetUp]
-        public void SetupTest()
+        public ContactHelper(ApplicationManager manager) 
+            : base(manager)
         {
-            driver = new ChromeDriver();
-            baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
         }
 
-        [TearDown]
-        public void TeardownTest()
+        public ContactHelper Create(ContactData contact)
         {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
+            InitNewContactCreation();
+            FillContactCreationForm(contact);
+            SubmitContactCreation();
+            return this;
         }
 
-        protected void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/");
-        }
-
-        protected void Login(AccountData account)
-        {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-
-        protected void Logout()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        protected void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-
-        protected void ReturnToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        protected void SelectGroup()
-        {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[5]")).Click();
-        }
-
-        protected void RemoveGroup(int index)
-        {
-            driver.FindElement(By.XPath("(//input[@name='delete'])[" + index + "]")).Click();
-        }
-
-        protected void InitNewGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        protected void FillGroupForm(GroupData groupData)
-        {
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
-        }
-
-        protected void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        protected void InitNewContactCreation()
+        public ContactHelper InitNewContactCreation()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
 
-        protected void FillContactCreationForm(ContactData contact)
+        public ContactHelper FillContactCreationForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
@@ -148,12 +76,13 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText(contact.Amonth);
             driver.FindElement(By.Name("ayear")).Clear();
             driver.FindElement(By.Name("ayear")).SendKeys(contact.Ayear);
+            return this;
         }
 
-        protected void SubmitContactCreation()
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            return this;
         }
-
     }
 }

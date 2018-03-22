@@ -10,12 +10,7 @@ namespace WebAddressbookTests
         [Test]
         public void DeleteGroupTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            SelectGroup();
-            RemoveGroup(1);
-            ReturnToGroupsPage();
+            appManager.Groups.Remove(1);
         }
     }
 }
