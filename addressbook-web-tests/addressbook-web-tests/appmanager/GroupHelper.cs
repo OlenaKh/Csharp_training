@@ -24,6 +24,28 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper Modify(int id, GroupData newData)
+        {
+            manager.Navigation.GoToGroupsPage();
+            InitGroupModification(id);
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+        }
+
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+
+        public GroupHelper InitGroupModification(int id)
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
+
         public GroupHelper Remove(int id)
         {
             manager.Navigation.GoToGroupsPage();

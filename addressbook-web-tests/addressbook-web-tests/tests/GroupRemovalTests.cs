@@ -8,7 +8,7 @@ namespace WebAddressbookTests
     public class DeleteGroupTests : TestBase
     {
         [Test]
-        public void DeleteGroupTest()
+        public void GroupRemovalTest()
         {
             appManager.Groups.Remove(1);
         }
