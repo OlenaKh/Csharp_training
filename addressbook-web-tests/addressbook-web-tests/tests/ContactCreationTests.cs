@@ -5,11 +5,11 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class AddNewContactTests : TestBase
+    public class ContactCreationTests : TestBase
     {
  
         [Test]
-        public void AddNewContactTest()
+        public void ContactCreationTest()
         {
             ContactData contact = new ContactData("Dmitriy","Fedorov");
 

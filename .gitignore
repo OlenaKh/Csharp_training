@@ -291,5 +291,3 @@ __pycache__/
 #Ignore the next files
 chromedriver.exe
 AssemblyInfo.cs
-addressbook-web-tests.csproj
-addressbook-web-tests.sln

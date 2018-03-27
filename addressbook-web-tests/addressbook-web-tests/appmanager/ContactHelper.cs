@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -17,8 +18,48 @@ namespace WebAddressbookTests
         public ContactHelper Create(ContactData contact)
         {
             InitNewContactCreation();
-            FillContactCreationForm(contact);
+            FillContactForm(contact);
             SubmitContactCreation();
+            return this;
+        }
+
+        public ContactHelper Remove(int id)
+        {
+            SelectContact(id);
+            RemoveContact();
+            return this;
+        }
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
+
+        public ContactHelper SelectContact(int id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])["+id+"]")).Click();
+            return this;
+        }
+
+        public ContactHelper Modify(int id, ContactData contactUpd)
+        {
+            InitContactModification(id);
+            FillContactForm(contactUpd);
+            SubmitContactModification();
+            return this;
+        }
+
+        public ContactHelper InitContactModification(int id)
+        {
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + id + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
             return this;
         }
 
@@ -28,7 +69,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper FillContactCreationForm(ContactData contact)
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
