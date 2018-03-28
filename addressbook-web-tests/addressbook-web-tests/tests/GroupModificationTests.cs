@@ -19,5 +19,15 @@ namespace WebAddressbookTests.tests
 
             appManager.Groups.Modify(1, newData);
         }
+
+        [Test]
+        public void GroupModificationEmptyRowTest()
+        {
+            GroupData newData = new GroupData("Group Updated with only Name");
+            newData.Header = null;
+            newData.Footer = null;
+
+            appManager.Groups.Modify(1, newData);
+        }
     }
 }

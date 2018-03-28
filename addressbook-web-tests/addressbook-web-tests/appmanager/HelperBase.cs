@@ -17,5 +17,20 @@ namespace WebAddressbookTests
             this.manager = manager;
             driver = manager.Driver;
         }
+
+        public void TypeValue(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
+        }
+
+        public void SelectValue(By locator, string value)
+        {
+            driver.FindElement(locator).Click();
+            new SelectElement(driver.FindElement(locator)).SelectByText(value);
+        }
     }
 }
