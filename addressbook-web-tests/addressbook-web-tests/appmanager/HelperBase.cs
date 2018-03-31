@@ -32,5 +32,19 @@ namespace WebAddressbookTests
             driver.FindElement(locator).Click();
             new SelectElement(driver.FindElement(locator)).SelectByText(value);
         }
+
+        public bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
     }
 }

@@ -5,12 +5,12 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class DeleteGroupTests : TestBase
+    public class DeleteGroupTests : AuthTestBase
     {
         [Test]
         public void GroupRemovalTest()
         {
-            appManager.Groups.Remove(1);
+            app.Groups.Remove(1);
         }
     }
 }

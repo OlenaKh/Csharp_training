@@ -8,20 +8,12 @@ namespace WebAddressbookTests
 {
     public class TestBase
     {
-        protected ApplicationManager appManager;
+        protected ApplicationManager app;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
-            appManager = new ApplicationManager();
-            appManager.Navigation.GoToHomePage();
-            appManager.Auth.Login(new AccountData("admin", "secret"));
-        }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            appManager.Stop();
+            app = ApplicationManager.GetInstance();
         }
     }
 }
