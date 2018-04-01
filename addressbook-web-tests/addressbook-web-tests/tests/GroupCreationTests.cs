@@ -14,6 +14,7 @@ namespace WebAddressbookTests
             groupData.Header = "Group Header";
             groupData.Footer = "Comment";
 
+            app.Navigation.GoToGroupsPage();
             app.Groups.Create(groupData);
         }
 
@@ -24,6 +25,7 @@ namespace WebAddressbookTests
             groupData.Header = "";
             groupData.Footer = "";
 
+            app.Navigation.GoToGroupsPage();
             app.Groups.Create(groupData);
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -14,8 +15,20 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
+            int id = 1;
+            ContactData contact = new ContactData("111", "111");
 
-            app.Contacts.Remove(1);
+            app.Navigation.GoToHomePage();
+
+            if (app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + id + "]")))
+            {
+                app.Contacts.Remove(id);
+            }
+            else
+            {
+                app.Contacts.Create(contact);
+                app.Contacts.Remove(id);
+            }
         }
     }
 }

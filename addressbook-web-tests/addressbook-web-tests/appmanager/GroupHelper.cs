@@ -16,7 +16,6 @@ namespace WebAddressbookTests
 
         public GroupHelper Create(GroupData group)
         {
-            manager.Navigation.GoToGroupsPage();
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
@@ -26,8 +25,8 @@ namespace WebAddressbookTests
 
         public GroupHelper Modify(int id, GroupData newData)
         {
-            manager.Navigation.GoToGroupsPage();
-            InitGroupModification(id);
+            SelectGroup(id);
+            InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
             ReturnToGroupsPage();
@@ -40,7 +39,7 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper InitGroupModification(int id)
+        public GroupHelper InitGroupModification()
         {
             driver.FindElement(By.Name("edit")).Click();
             return this;
@@ -48,9 +47,8 @@ namespace WebAddressbookTests
 
         public GroupHelper Remove(int id)
         {
-            manager.Navigation.GoToGroupsPage();
-            SelectGroup();
-            RemoveGroup(id);
+            SelectGroup(id);
+            RemoveGroup();
             ReturnToGroupsPage();
             return this;
         }
@@ -61,15 +59,16 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup()
+        public GroupHelper SelectGroup(int id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[5]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + id + "]")).Click();
             return this;
+           
         }
 
-        public GroupHelper RemoveGroup(int index)
+        public GroupHelper RemoveGroup()
         {
-            driver.FindElement(By.XPath("(//input[@name='delete'])[" + index + "]")).Click();
+            driver.FindElement(By.Name("delete")).Click();
             return this;
         }
 
@@ -92,5 +91,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("submit")).Click();
             return this;
         }
+
     }
 }

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
@@ -13,6 +17,7 @@ namespace WebAddressbookTests
         {
             ContactData contact = new ContactData("Dmitriy","Fedorov");
 
+            app.Navigation.GoToHomePage();
             app.Contacts.Create(contact);
         }
     }
