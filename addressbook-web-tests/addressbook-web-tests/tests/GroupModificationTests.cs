@@ -14,7 +14,7 @@ namespace WebAddressbookTests.tests
         [Test]
         public void GroupModificationTest()
         {
-            int id = 1;
+            int id = 0;
             GroupData groupData = new GroupData("New Group");
             groupData.Header = "123";
             groupData.Footer = "123";
@@ -24,22 +24,23 @@ namespace WebAddressbookTests.tests
             newData.Footer = "Updated Comment";
 
             app.Navigation.GoToGroupsPage();
-            if (app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + id + "]")))
-            {
-                app.Groups.Modify(id, newData);
-            }
-            else
+            if (!app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (id + 1) + "]")))
             {
                 app.Groups.Create(groupData);
-                app.Groups.Modify(id, newData);
             }
-            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Modify(id, newData);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[id].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
         public void GroupModificationEmptyRowTest()
         {
-            int id = 1;
+            int id = 0;
 
             GroupData groupData = new GroupData("New Group");
             groupData.Header = "123";
@@ -50,15 +51,17 @@ namespace WebAddressbookTests.tests
             newData.Footer = null;
 
             app.Navigation.GoToGroupsPage();
-            if (app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + id + "]")))
-            {
-                app.Groups.Modify(id, newData);
-            }
-            else
+            if (!app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (id +1) + "]")))
             {
                 app.Groups.Create(groupData);
-                app.Groups.Modify(id, newData);
             }
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Groups.Modify(id, newData);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[id].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

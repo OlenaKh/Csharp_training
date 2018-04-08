@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -16,11 +17,26 @@ namespace WebAddressbookTests
 
         public GroupHelper Create(GroupData group)
         {
+            manager.Navigation.GoToGroupsPage();
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
             ReturnToGroupsPage();
             return this;
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigation.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach(IWebElement element in elements)
+            {
+                GroupData group = new GroupData(element.Text);
+                groups.Add(group);
+            }
+
+            return groups;
         }
 
         public GroupHelper Modify(int id, GroupData newData)
@@ -61,7 +77,7 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + id + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (id + 1) + "]")).Click();
             return this;
            
         }

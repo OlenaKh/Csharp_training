@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace WebAddressbookTests
 {
@@ -13,9 +14,15 @@ namespace WebAddressbookTests
             GroupData groupData = new GroupData("Test Group 1");
             groupData.Header = "Group Header";
             groupData.Footer = "Comment";
-
-            app.Navigation.GoToGroupsPage();
+            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(groupData);
+            List <GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(groupData);
+            //Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
 
         [Test]
@@ -25,8 +32,14 @@ namespace WebAddressbookTests
             groupData.Header = "";
             groupData.Footer = "";
 
-            app.Navigation.GoToGroupsPage();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Create(groupData);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.Add(groupData);
+            //Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

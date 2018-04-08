@@ -15,22 +15,24 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            int id = 1;
+            int id = 0;
             ContactData contact = new ContactData("111", "111");
             ContactData contactUpd = new ContactData("Salvador", "Dali");
 
             app.Navigation.GoToHomePage();
-
-
-            if (app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + id + "]")))
-            {
-                app.Contacts.Modify(id, contactUpd);
-            }
-            else
+            if (!app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (id + 1) + "]")))
             {
                 app.Contacts.Create(contact);
-                app.Contacts.Modify(id, contactUpd);
             }
+
+            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+            app.Contacts.Modify(id, contactUpd);
+            List<ContactData> newContacts = app.Contacts.GetContactsList();
+            oldContacts[id].Lastname = contactUpd.Lastname;
+            oldContacts[id].Firstname = contactUpd.Firstname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
 
         }
     }

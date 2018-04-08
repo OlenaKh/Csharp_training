@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using NUnit.Framework;
@@ -33,6 +34,21 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public List<ContactData> GetContactsList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigation.GoToHomePage();
+            IList<IWebElement> elements = new List<IWebElement>(driver.FindElements(By.XPath("//tr//td[2] | //tr//td[3]")));
+            System.Console.WriteLine("num of elements" + elements.Count);
+            for (int i = 0; i<elements.Count;i+=2)
+            {
+                ContactData contact = new ContactData(elements[i].Text, elements[i+1].Text);
+                contacts.Add(contact);
+            }
+
+            return contacts;
+        }
+
         public ContactHelper Remove(int id)
         {
             SelectContact(id);
@@ -43,13 +59,13 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])["+id+"]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (id + 1) + "]")).Click();
             return this;
         }
 
         public ContactHelper InitContactModification(int id)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + id + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (id + 1) + "]")).Click();
             return this;
         }
 
