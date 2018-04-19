@@ -20,6 +20,9 @@ namespace WebAddressbookTests
             app.Navigation.GoToHomePage();
             List<ContactData> oldContacts = app.Contacts.GetContactsList();
             app.Contacts.Create(contact);
+
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactsCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactsList();
             oldContacts.Add(contact);
             oldContacts.Sort();

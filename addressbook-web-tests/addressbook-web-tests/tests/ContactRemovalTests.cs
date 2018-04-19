@@ -16,21 +16,31 @@ namespace WebAddressbookTests
         public void ContactRemovalTest()
         {
             int id = 0;
-            ContactData contact = new ContactData("101", "101");
+            ContactData contactData = new ContactData("101", "101");
 
             app.Navigation.GoToHomePage();
             if (!app.Auth.IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (id + 1) + "]")))
             {
-                app.Contacts.Create(contact);
+                app.Contacts.Create(contactData);
             }
 
             List<ContactData> oldContacts = app.Contacts.GetContactsList();
             app.Contacts.Remove(id);
+
+            Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactsCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactsList();
+            ContactData toBeRemoved = oldContacts[id];
             oldContacts.RemoveAt(id);
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+            }
+
         }
     }
 }

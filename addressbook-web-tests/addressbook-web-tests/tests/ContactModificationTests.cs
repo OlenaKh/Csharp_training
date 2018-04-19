@@ -27,6 +27,9 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactsList();
             app.Contacts.Modify(id, contactUpd);
+
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactsCount());
+
             List<ContactData> newContacts = app.Contacts.GetContactsList();
             oldContacts[id].Lastname = contactUpd.Lastname;
             oldContacts[id].Firstname = contactUpd.Firstname;

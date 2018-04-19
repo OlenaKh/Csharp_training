@@ -8,8 +8,6 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
-        private string lastname;
         private string middlename = "";
         private string nickname = "";
         private string company = "";
@@ -36,8 +34,8 @@ namespace WebAddressbookTests
 
         public ContactData(string lastname, string firstname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            Firstname = firstname;
+            Lastname = lastname;
         }
 
         public bool Equals(ContactData other)
@@ -71,293 +69,56 @@ namespace WebAddressbookTests
             }
             return (Firstname + Lastname).CompareTo(other.Firstname + other.Lastname);
         }
+ 
+        public string Firstname { get; set; }
 
-        public string Firstname
-        {
-            get
-            {
-                return firstname;
-            }
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string Lastname { get; set; }
 
-        public string Lastname
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
+        public string Middlename { get; set; }
 
-        public string Middlename
-        {
-            get
-            {
-                return middlename;
-            }
-            set
-            {
-                middlename = value;
-            }
-        }
+        public string Nickname { get; set; }
 
-        public string Nickname
-        {
-            get
-            {
-                return nickname;
-            }
-            set
-            {
-                nickname = value;
-            }
-        }
+        public string Company { get; set; }
 
-        public string Company
-        {
-            get
-            {
-                return company;
-            }
-            set
-            {
-                company = value;
-            }
-        }
+        public string Title { get; set; }
 
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
+        public string Address { get; set; }
 
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
-        }
+        public string Address2 { get; set; }
 
-        public string Address2
-        {
-            get
-            {
-                return address2;
-            }
-            set
-            {
-                address2 = value;
-            }
-        }
+        public string Homephone { get; set; }
 
-        public string Homephone
-        {
-            get
-            {
-                return homephone;
-            }
-            set
-            {
-                homephone = value;
-            }
-        }
+        public string Homephone2 { get; set; }
 
-        public string Homephone2
-        {
-            get
-            {
-                return homephone2;
-            }
-            set
-            {
-                homephone2 = value;
-            }
-        }
+        public string Mobilephone { get; set; }
 
-        public string Mobilephone
-        {
-            get
-            {
-                return mobilephone;
-            }
-            set
-            {
-                mobilephone = value;
-            }
-        }
+        public string Workphone { get; set; }
 
-        public string Workphone
-        {
-            get
-            {
-                return workphone;
-            }
-            set
-            {
-                workphone = value;
-            }
-        }
+        public string Fax { get; set; }
 
-        public string Fax
-        {
-            get
-            {
-                return fax;
-            }
-            set
-            {
-                fax = value;
-            }
-        }
+        public string Email { get; set; }
 
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-            }
-        }
+        public string Email2 { get; set; }
 
-        public string Email2
-        {
-            get
-            {
-                return email2;
-            }
-            set
-            {
-                email2 = value;
-            }
-        }
+        public string Email3 { get; set; }
 
-        public string Email3
-        {
-            get
-            {
-                return email3;
-            }
-            set
-            {
-                email3 = value;
-            }
-        }
+        public string Homepage { get; set; }
 
-        public string Homepage
-        {
-            get
-            {
-                return homepage;
-            }
-            set
-            {
-                homepage = value;
-            }
-        }
+        public string Notes { get; set; }
 
-        public string Notes
-        {
-            get
-            {
-                return notes;
-            }
-            set
-            {
-                notes = value;
-            }
-        }
+        public string Bday { get; set; }
 
-        public string Bday
-        {
-            get
-            {
-                return bday;
-            }
-            set
-            {
-                bday = value;
-            }
-        }
+        public string Bmonth { get; set; }
 
-        public string Bmonth
-        {
-            get
-            {
-                return bmonth;
-            }
-            set
-            {
-                bmonth = value;
-            }
-        }
+        public string Byear { get; set; }
 
-        public string Byear
-        {
-            get
-            {
-                return byear;
-            }
-            set
-            {
-                byear = value;
-            }
-        }
+        public string Aday { get; set; }
 
-        public string Aday
-        {
-            get
-            {
-                return aday;
-            }
-            set
-            {
-                aday = value;
-            }
-        }
+        public string Amonth { get; set; }
 
-        public string Amonth
-        {
-            get
-            {
-                return amonth;
-            }
-            set
-            {
-                amonth = value;
-            }
-        }
+        public string Ayear { get; set; }
 
-        public string Ayear
-        {
-            get
-            {
-                return ayear;
-            }
-            set
-            {
-                ayear = value;
-            }
-        }
+
+        public string Id { get; set; }
     }
 }
